@@ -4,7 +4,7 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from .forms import SignupForm, LoginForm
+from forms import SignupForm, LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
@@ -16,7 +16,7 @@ login_manager.login_view = "auth"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-from .models import User
+from models import User
 
 @login_manager.user_loader
 def load_user(user_id):
