@@ -8,17 +8,15 @@ class SignupForm(FlaskForm):
     email    = EmailField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), EqualTo('password_confirm', message="Password must be equals.")])
     password_confirm = PasswordField('Confirm PW', validators=[DataRequired()])
-    #birth     = DateField('Date of Birth')
+    date_hired = DateField('Date Hired')
     submit = SubmitField('Register')
+
 
 class LoginForm(FlaskForm):    
     email    = EmailField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])    
     submit   = SubmitField('Login')
 
-class QuoteForm(FlaskForm):    
-    id      = IntegerField('id')
-    user_id = IntegerField('id')
-    author  = StringField('Author', validators=[DataRequired(), Length(min=2)])
-    message = TextAreaField('Message', validators=[DataRequired(), Length(min=10)])    
-    submit  = SubmitField('Submit')    
+class ItemForm(FlaskForm):    
+    name      = StringField('Item/Product')
+    submit    = SubmitField('Add')    

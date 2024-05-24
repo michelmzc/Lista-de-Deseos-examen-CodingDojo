@@ -1,0 +1,18 @@
+{% extends "base_template.html" %}
+
+{% block title %}{{ item.name }} {% endblock %}
+
+{% block content %}
+<br>
+<div class="col-12">
+    <h5><strong>{{ item.name }} </strong></h5>
+    <br>
+    <p> Users who added this product/item under their wish list:</p>
+    <br>     
+        {% for user in users %}
+            <p> {{ user }} <p>
+        {% endfor %}
+    
+</div>
+
+{% endblock %}

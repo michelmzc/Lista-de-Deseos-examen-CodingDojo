@@ -1,7 +1,65 @@
 {% extends "base_template.html" %}
 
-{% block title %}Quotable Quotes{% endblock %}
+{% block title %}My Wish List{% endblock %}
 
 {% block content %}
-    {{ num_posts }} posts
+    <br>
+    <p>Your Wish List:</p>
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Added by</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for wish in wishlist %}
+            <tr>
+                <th scope="row">
+                    <a href="/item/{{wish.item.id}}">{{ wish.item.name }}</a>
+                </th>
+                <td>{{ wish.item.user.name }}</td>
+                <td>{{ wish.item.date }}</td>            
+                <td>
+                    {% if current_user.id == wish.item.user.id %}
+                        <a href="/item/delete/{{wish.item.id}}">Delete</a>         
+                    {% else %}
+                        <a href="/wish/remove/{{wish.id}}">Remove from my Wishlist</a>         
+                    {% endif %}
+                </td>
+              </tr>           
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <hr>
+
+    <p>Other User's Wish List</p>
+    <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Added by</th>
+            <th scope="col">Date Added</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for other_wish in others_wishs %}                
+                <tr>
+                    <th scope="row"><a href="/item/{{other_wish.id}}">{{ other_wish.name }}</a></th>
+                    <td>{{ other_wish.user.name }}</td>
+                    <td>{{ other_wish.date }}</td>            
+                    <td>
+                        <a href="/wish/add/{{ other_wish.id }}">Add to my Wishlist</a>         
+                    </td>
+                  </tr>
+            {% endfor %}          
+        </tbody>
+    </table>
+    <div class="col-12 d-flex justify-content-end">
+        <a href="/item/add"><strong>Add Item</strong></a>
+    </div>
 {% endblock %}
